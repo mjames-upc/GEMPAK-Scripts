@@ -117,7 +117,7 @@ r
 e
 EOF1
 
-
+# overlay thermal wind
 gdwind << EOF3
    GVECT   = thrm(hght)
    CTYPE   = 
