@@ -1,5 +1,5 @@
 #! /bin/bash -f
-#-----------------
+#---------------------
 # GEMPAK Trenberth map
 # 
 # Programs used		GDCNTR
@@ -132,6 +132,12 @@ gdwind << EOF3
    e
 EOF3
 
+# cleanup
+#
+# gpend should be commented out if you're testing with X Windows, 
+# otherwise it will close immediately after it opens
+#
+# also remove nts files from current working directory
 gpend
 rm last.nts
 rm gemglb.nts
