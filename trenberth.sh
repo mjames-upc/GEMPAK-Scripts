@@ -1,23 +1,59 @@
 #! /bin/bash -f
+#-----------------
+# GEMPAK Trenberth map
+# 
+# Programs used		GDCNTR
+# Author		Michael James, Unidata
+# Last Updated		June 2012
+# 
+# ABOUT
+#--------------
+# The traditional omega equation identifies fundamental processes
+# that determine vertical motion.  However, it has the disadvantage
+# of being difficult to evaluate because of two terms (temperature 
+# advection term and differential vorticity advection term) cancel
+# in some situations.
+#
+# The Trenberth formulation presents an equation which contains both 
+# temperature and geostrophic vorticity at just one level, and in one
+# term.  Temperature usually increases southward, so where geostrophic
+# vorticity decreases toward the east, the result is positive vorticity
+# advection, the result being ascent (negative omega).
+#
+# See http://weather.ou.edu/~mjames/gempak/TrenberthFormulation.html
+# for a more detailed explanation.
+#
+#------------
+
 . /home/gempak/NAWIPS/Gemenviron.profile
 
-# set dirs
-# TOP=/home/gempak/scripts
+# set working directories
+GFSdir=$MODEL/gfs
 
 # set date/time
 YYYYMMDD=`date -u +%Y%m%d`
 HHNN=`date -u +%H%M`
+
+# set forecast time to use, default 12-hr
 FTIME=f012
-GFSdir=$MODEL/gfs
+
+# get latest GFS file 
 lastFile=`ls $GFSdir | grep gfs211 | tail -1`
+
+# full path and file name
 GDFILE=$GFSdir/$lastFile
+
+# GEMPAK variables: projection, data bounds, and title
 DATAAREA='20;-130;52;-50'
 PROJ='str/90;-100;0'
 TITLE='700 mb Vorticity / 1000-500 mb Thermal Wind'
 
+# set device
+# default is gif image, user will comment/uncomment here to select X Window 
 DEV='gif|trenberth.gif|1024;768'
 #DEV='xw|xw|900;600'
 
+# The Trenberth map uses two runs through GDCNTR: 
 # 1) 700 mb vorticity color-filled contours
 # 2) 500-1000 mb heights
 
