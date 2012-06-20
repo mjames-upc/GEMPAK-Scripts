@@ -3,6 +3,7 @@
 # GEMPAK Trenberth map
 # 
 # Programs used		GDCNTR
+#			GDWIND
 # Author		Michael James, Unidata
 # Last Updated		June 2012
 # 
